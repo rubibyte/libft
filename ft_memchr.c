@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 10:48:43 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/19 02:14:24 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:48:03 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int			i;
+	int				i;
 	unsigned char	*uc_s;
 
 	uc_s = (unsigned char *) s;

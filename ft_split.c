@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:21:52 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/30 23:52:57 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:47:05 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static size_t	ft_word_count(char const *s, char const c)
 {
-	unsigned int	i;
-	size_t			count;
+	int		i;
+	size_t	count;
 
-	i = 0;
+	i = -1;
 	count = 0;
-	while (s[i++])
+	while (s[++i])
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
 	return (count);
