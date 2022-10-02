@@ -6,12 +6,17 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/10/01 22:51:18 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/10/02 21:23:30 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libft.a
+
+BONUS = .bonus
+
+OBJ_DIR = objects
+
 
 
 SRC = ft_bzero.c		ft_isalpha.c	ft_isprint.c 	ft_memcpy.c \
@@ -29,55 +34,83 @@ SRC_BONUS = ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c \
 			ft_lstclear.c		ft_lstiter.c		ft_lstmap.c
 
 
-BONUS = .bonus
 
-OBJS = $(SRC:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-OBJS_BONUS = $(SRC_BONUS:.c=.o)
-
-
-DEPS = $(SRC:.c=.d)
-
-DEPS_BONUS = $(SRC_BONUS:.c=.d)
+OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
 
 
-RM = rm -f
+
+DEPS = $(addsuffix .d, $(basename $(OBJS)))
+
+DEPS_BONUS = $(addsuffix .d, $(basename $(OBJS_BONUS)))
+
+
+
+RM = rm -rf
 
 INCLUDE = -I ./
 
-CFLAGS = -Wall -Wextra -Werror -W #-O3 #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -W #-Ofast -O3 -fsanitize=address -g3
+
+DEP_FLAGS = -MMD -MP
 
 
-%.o:%.c
-	$(CC) $(CFLAGS) -MMD -MP $(INCLUDE) -c $< -o $@
 
+$(OBJ_DIR)/%.o: %.c Makefile
+	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
 
-.PHONY: all bonus clean fclean re bonus
 
 
 all: $(NAME)
 
+
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
+	@echo "-> Objects and dependencies created."
+	@echo "-> Library created."
 
 -include $(DEPS)
 
 
-bonus: $(BONUS)
+
+$(OBJS): | $(OBJ_DIR)
+
+
+
+$(OBJ_DIR):
+	@mkdir $@
+	@echo "-> Objects directory created."
+
+
 
 $(BONUS): $(OBJS) $(OBJS_BONUS)
-	touch $@
-	ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+	@touch $@
+	@ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+	@echo "-> Objects and dependencies created."
+	@echo "-> Library with bonus created."
 
 -include $(DEPS_BONUS)
 
 
+
+bonus: $(BONUS)
+
+
+
 clean:
-	$(RM) $(OBJS) $(OBJS_BONUS) $(DEPS) $(DEPS_BONUS)
+	@$(RM) $(OBJ_DIR)
+	@echo "-> Objects directory deleted successfully."
+
 
 
 fclean: clean
-	$(RM) $(NAME) $(BONUS)
+	@$(RM) $(NAME) $(BONUS)
+	@echo "-> All files cleaned!"
 
 
-re: fclean all  
+
+re: fclean all
+
+
+.PHONY: all bonus clean fclean re bonus
