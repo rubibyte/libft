@@ -47,17 +47,21 @@ DEPS_BONUS = $(addsuffix .d, $(basename $(OBJS_BONUS)))
 
 
 
-RM = rm -rf
+MAKEFILE = Makefile
 
-INCLUDE = -I ./
+AR = ar -rcs
 
 CFLAGS = -Wall -Wextra -Werror -W #-Ofast -O3 -fsanitize=address -g3
 
 DEP_FLAGS = -MMD -MP
 
+INCLUDE = -I ./
+
+RM = rm -rf
 
 
-$(OBJ_DIR)/%.o: %.c Makefile
+
+$(OBJ_DIR)/%.o: %.c $(MAKEFILE)
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
 
 
@@ -66,7 +70,7 @@ all: $(NAME)
 
 
 $(NAME): $(OBJS)
-	@ar -rcs $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
 	@echo "-> Objects and dependencies created."
 	@echo "-> Library created."
 
@@ -86,7 +90,7 @@ $(OBJ_DIR):
 
 $(BONUS): $(OBJS) $(OBJS_BONUS)
 	@touch $@
-	@ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+	@$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
 	@echo "-> Objects and dependencies created."
 	@echo "-> Library with bonus created."
 
