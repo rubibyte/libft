@@ -6,7 +6,7 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/10/02 21:23:30 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/10/18 02:14:10 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,11 @@ NAME = libft.a
 
 BONUS = .bonus
 
+SRC_DIR = sources
+
 OBJ_DIR = objects
 
+DEPS_DIR = dependencies
 
 
 SRC = ft_bzero.c		ft_isalpha.c	ft_isprint.c 	ft_memcpy.c \
@@ -34,17 +37,14 @@ SRC_BONUS = ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c \
 			ft_lstclear.c		ft_lstiter.c		ft_lstmap.c
 
 
-
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
 
 
+DEPS = $(addprefix $(DEPS_DIR)/, $(SRC:.c=.d))
 
-DEPS = $(addsuffix .d, $(basename $(OBJS)))
-
-DEPS_BONUS = $(addsuffix .d, $(basename $(OBJS_BONUS)))
-
+DEPS_BONUS = $(addprefix $(DEPS_DIR)/, $(SRC_BONUS:.c=.d))
 
 
 MAKEFILE = Makefile
@@ -55,18 +55,17 @@ CFLAGS = -Wall -Wextra -Werror -W #-Ofast -O3 -fsanitize=address -g3
 
 DEP_FLAGS = -MMD -MP
 
-INCLUDE = -I ./
+INCLUDE = -I includes/
 
 RM = rm -rf
 
 
-
-$(OBJ_DIR)/%.o: %.c $(MAKEFILE)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE)
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
+	@mv $(patsubst %.o, %.d, $@) $(DEPS_DIR)/
 
-
-
-all: $(NAME)
+all: 
+	@$(MAKE) $(NAME)
 
 
 $(NAME): $(OBJS)
@@ -77,15 +76,20 @@ $(NAME): $(OBJS)
 -include $(DEPS)
 
 
-
 $(OBJS): | $(OBJ_DIR)
-
 
 
 $(OBJ_DIR):
 	@mkdir $@
 	@echo "-> Objects directory created."
 
+
+$(DEPS): | $(DEPS_DIR)
+
+
+$(DEPS_DIR):
+	@mkdir $@
+	@echo "-> Dependencies directory created."
 
 
 $(BONUS): $(OBJS) $(OBJS_BONUS)
@@ -97,24 +101,26 @@ $(BONUS): $(OBJS) $(OBJS_BONUS)
 -include $(DEPS_BONUS)
 
 
-
-bonus: $(BONUS)
-
+bonus: 
+	@$(MAKE) $(BONUS)
 
 
 clean:
 	@$(RM) $(OBJ_DIR)
+	@$(RM) $(DEPS_DIR)
 	@echo "-> Objects directory deleted successfully."
+	@echo "-> Dependencies directory deleted successfully."
 
 
-
-fclean: clean
+fclean: 
+	@$(MAKE) clean
 	@$(RM) $(NAME) $(BONUS)
 	@echo "-> All files cleaned!"
 
 
-
-re: fclean all
+re: 
+	@$(MAKE) fclean 
+	@$(MAKE) all
 
 
 .PHONY: all bonus clean fclean re bonus
