@@ -6,7 +6,7 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/10/18 02:14:10 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/10/18 22:15:03 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,14 @@ CFLAGS = -Wall -Wextra -Werror -W #-Ofast -O3 -fsanitize=address -g3
 
 DEP_FLAGS = -MMD -MP
 
-INCLUDE = -I includes/
+INCLUDE = -Iincludes/
 
-RM = rm -rf
+RM = rm -f
+
+RM_DIR = rm -rf
 
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE) | $(OBJ_DIR) $(DEPS_DIR)
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
 	@mv $(patsubst %.o, %.d, $@) $(DEPS_DIR)/
 
@@ -76,15 +78,9 @@ $(NAME): $(OBJS)
 -include $(DEPS)
 
 
-$(OBJS): | $(OBJ_DIR)
-
-
 $(OBJ_DIR):
 	@mkdir $@
 	@echo "-> Objects directory created."
-
-
-$(DEPS): | $(DEPS_DIR)
 
 
 $(DEPS_DIR):
@@ -106,8 +102,8 @@ bonus:
 
 
 clean:
-	@$(RM) $(OBJ_DIR)
-	@$(RM) $(DEPS_DIR)
+	@$(RM_DIR) $(OBJ_DIR)
+	@$(RM_DIR) $(DEPS_DIR)
 	@echo "-> Objects directory deleted successfully."
 	@echo "-> Dependencies directory deleted successfully."
 
