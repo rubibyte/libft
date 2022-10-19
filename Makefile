@@ -15,11 +15,16 @@ NAME = libft.a
 
 BONUS = .bonus
 
-SRC_DIR = sources
+SRC_DIR = src
 
-OBJ_DIR = objects
+OBJ_DIR = obj
 
-DEPS_DIR = dependencies
+DEP_DIR = dep
+
+#colors
+N='\033[0m' 	#no color text reset
+G='\033[0;32m' 	#green
+R='\033[0;31m'	#red
 
 
 SRC = ft_bzero.c		ft_isalpha.c	ft_isprint.c 	ft_memcpy.c \
@@ -37,14 +42,14 @@ SRC_BONUS = ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c \
 			ft_lstclear.c		ft_lstiter.c		ft_lstmap.c
 
 
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
+OBJ_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
 
 
-DEPS = $(addprefix $(DEPS_DIR)/, $(SRC:.c=.d))
+DEP = $(addprefix $(DEP_DIR)/, $(SRC:.c=.d))
 
-DEPS_BONUS = $(addprefix $(DEPS_DIR)/, $(SRC_BONUS:.c=.d))
+DEP_BONUS = $(addprefix $(DEP_DIR)/, $(SRC_BONUS:.c=.d))
 
 
 MAKEFILE = Makefile
@@ -55,46 +60,42 @@ CFLAGS = -Wall -Wextra -Werror -W #-Ofast -O3 -fsanitize=address -g3
 
 DEP_FLAGS = -MMD -MP
 
-INCLUDE = -Iincludes/
+INCLUDE = -Iinclude/
 
 RM = rm -f
 
 RM_DIR = rm -rf
 
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE) | $(OBJ_DIR) $(DEPS_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE) | $(OBJ_DIR) $(DEP_DIR)
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
-	@mv $(patsubst %.o, %.d, $@) $(DEPS_DIR)/
+	@mv $(patsubst %.o, %.d, $@) $(DEP_DIR)/
 
 all: 
 	@$(MAKE) $(NAME)
 
 
-$(NAME): $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
-	@echo "-> Objects and dependencies created."
-	@echo "-> Library created."
-
--include $(DEPS)
+$(NAME): $(OBJ)
+	@$(AR) $(NAME) $(OBJ)
+	@echo "$(G)[LIBFT]->Objects and dependencies created.$(N)"
+	@echo "$(G)[LIBFT]->Library created.$(N)"
 
 
 $(OBJ_DIR):
 	@mkdir $@
-	@echo "-> Objects directory created."
+	@echo "$(G)[LIBFT]->Objects directory created.$(N)"
 
 
-$(DEPS_DIR):
+$(DEP_DIR):
 	@mkdir $@
-	@echo "-> Dependencies directory created."
+	@echo "$(G)[LIBFT]->Dependencies directory created.$(N)"
 
 
-$(BONUS): $(OBJS) $(OBJS_BONUS)
+$(BONUS): $(OBJ) $(OBJ_BONUS)
 	@touch $@
-	@$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
-	@echo "-> Objects and dependencies created."
-	@echo "-> Library with bonus created."
-
--include $(DEPS_BONUS)
+	@$(AR) $(NAME) $(OBJ) $(OBJ_BONUS)
+	@echo "$(G)[LIBFT]->Objects and dependencies created.$(N)"
+	@echo "$(G)[LIBFT]->Library with bonus created.$(N)"
 
 
 bonus: 
@@ -103,20 +104,23 @@ bonus:
 
 clean:
 	@$(RM_DIR) $(OBJ_DIR)
-	@$(RM_DIR) $(DEPS_DIR)
-	@echo "-> Objects directory deleted successfully."
-	@echo "-> Dependencies directory deleted successfully."
+	@$(RM_DIR) $(DEP_DIR)
+	@echo "$(G)[LIBFT]->Objects directory $(R)deleted$(N) $(G)successfully.$(N)"
+	@echo "$(G)[LIBFT]->Dependencies directory $(R)deleted$(N) $(G)successfully.$(N)"
 
 
 fclean: 
 	@$(MAKE) clean
 	@$(RM) $(NAME) $(BONUS)
-	@echo "-> All files cleaned!"
+	@echo "$(G)[LIBFT]->All files cleaned!$(N)"
 
 
 re: 
 	@$(MAKE) fclean 
 	@$(MAKE) all
 
+
+-include $(DEPS)
+-include $(DEPS_BONUS)
 
 .PHONY: all clean fclean re bonus
