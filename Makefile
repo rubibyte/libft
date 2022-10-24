@@ -6,25 +6,26 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/10/18 22:15:03 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/10/24 02:51:07 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = libft.a
 
-BONUS = .bonus
-
 SRC_DIR = src
 
-OBJ_DIR = obj
+OBJ_DIR = .obj
 
-DEP_DIR = dep
+DEP_DIR = .dep
 
 #colors
-N='\033[0m' 	#no color text reset
-G='\033[0;32m' 	#green
-R='\033[0;31m'	#red
+#N = no color text reset
+#G = green
+#R = red
+N = \033[0m
+G = \033[0;32m
+R = \033[0;31m
 
 
 SRC = ft_bzero.c		ft_isalpha.c	ft_isprint.c 	ft_memcpy.c \
@@ -35,21 +36,12 @@ SRC = ft_bzero.c		ft_isalpha.c	ft_isprint.c 	ft_memcpy.c \
 	  ft_strlcat.c 		ft_strncmp.c 	ft_tolower.c 	ft_substr.c \
 	  ft_putchar_fd.c	ft_putstr_fd.c 	ft_putendl_fd.c ft_putnbr_fd.c \
 	  ft_striteri.c		ft_strmapi.c 	ft_itoa.c 		ft_strjoin.c \
-	  ft_strtrim.c		ft_split.c
-
-SRC_BONUS = ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c \
-			ft_lstlast.c		ft_lstadd_back.c 	ft_lstdelone.c \
-			ft_lstclear.c		ft_lstiter.c		ft_lstmap.c
+	  ft_strtrim.c		ft_split.c		ft_nbrlen.c		ft_absval.c
 
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-OBJ_BONUS = $(addprefix $(OBJ_DIR)/, $(SRC_BONUS:.c=.o))
-
-
 DEP = $(addprefix $(DEP_DIR)/, $(SRC:.c=.d))
-
-DEP_BONUS = $(addprefix $(DEP_DIR)/, $(SRC_BONUS:.c=.d))
 
 
 MAKEFILE = Makefile
@@ -58,7 +50,7 @@ AR = ar -rcs
 
 CFLAGS = -Wall -Wextra -Werror -W #-Ofast -O3 -fsanitize=address -g3
 
-DEP_FLAGS = -MMD -MP
+DEP_FLAGS = -MT $@ -MMD -MP
 
 INCLUDE = -Iinclude/
 
@@ -67,60 +59,39 @@ RM = rm -f
 RM_DIR = rm -rf
 
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE) | $(OBJ_DIR) $(DEP_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE)
+	@mkdir -p $(dir $@) $(DEP_DIR)/
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
 	@mv $(patsubst %.o, %.d, $@) $(DEP_DIR)/
 
 all: 
 	@$(MAKE) $(NAME)
 
-
 $(NAME): $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(G)[LIBFT]->Objects and dependencies created.$(N)"
 	@echo "$(G)[LIBFT]->Library created.$(N)"
 
-
-$(OBJ_DIR):
-	@mkdir $@
-	@echo "$(G)[LIBFT]->Objects directory created.$(N)"
-
-
-$(DEP_DIR):
-	@mkdir $@
-	@echo "$(G)[LIBFT]->Dependencies directory created.$(N)"
-
-
-$(BONUS): $(OBJ) $(OBJ_BONUS)
+$(BONUS): $(OBJ)
 	@touch $@
-	@$(AR) $(NAME) $(OBJ) $(OBJ_BONUS)
+	@$(AR) $(NAME) $(OBJ)
 	@echo "$(G)[LIBFT]->Objects and dependencies created.$(N)"
 	@echo "$(G)[LIBFT]->Library with bonus created.$(N)"
 
-
-bonus: 
-	@$(MAKE) $(BONUS)
-
-
 clean:
-	@$(RM_DIR) $(OBJ_DIR)
-	@$(RM_DIR) $(DEP_DIR)
+	@$(RM_DIR) $(OBJ_DIR) $(DEP_DIR)
 	@echo "$(G)[LIBFT]->Objects directory $(R)deleted$(N) $(G)successfully.$(N)"
 	@echo "$(G)[LIBFT]->Dependencies directory $(R)deleted$(N) $(G)successfully.$(N)"
 
-
 fclean: 
 	@$(MAKE) clean
-	@$(RM) $(NAME) $(BONUS)
+	@$(RM) $(NAME)
 	@echo "$(G)[LIBFT]->All files cleaned!$(N)"
-
 
 re: 
 	@$(MAKE) fclean 
 	@$(MAKE) all
 
+-include $(DEP)
 
--include $(DEPS)
--include $(DEPS_BONUS)
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

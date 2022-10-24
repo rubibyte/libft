@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_absval.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 18:37:39 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/29 20:25:03 by xrodrigu         ###   ########.fr       */
+/*   Created: 2022/10/20 19:47:22 by xrodrigu          #+#    #+#             */
+/*   Updated: 2022/10/20 19:49:05 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_absval(int n)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	if (n < 0)
+		n = -n;
+	return (n);
 }

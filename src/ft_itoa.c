@@ -6,35 +6,11 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:35:30 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/24 23:42:43 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/10/20 19:50:28 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_absval(int n)
-{
-	if (n < 0)
-		n = -n;
-	return (n);
-}
-
-static size_t	ft_nbrlen(long n)
-{
-	size_t	size;
-
-	if (n == 0)
-		return (1);
-	size = 0;
-	if (n < 0)
-		size++;
-	while (n)
-	{
-		size++;
-		n /= 10;
-	}
-	return (size);
-}
 
 char	*ft_itoa(int n)
 {
