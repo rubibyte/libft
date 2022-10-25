@@ -6,7 +6,7 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/10/24 02:51:07 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/10/24 03:54:08 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC = ft_bzero.c		ft_isalpha.c	ft_isprint.c 	ft_memcpy.c \
 	  ft_strlcat.c 		ft_strncmp.c 	ft_tolower.c 	ft_substr.c \
 	  ft_putchar_fd.c	ft_putstr_fd.c 	ft_putendl_fd.c ft_putnbr_fd.c \
 	  ft_striteri.c		ft_strmapi.c 	ft_itoa.c 		ft_strjoin.c \
-	  ft_strtrim.c		ft_split.c		ft_nbrlen.c		ft_absval.c
+	  ft_strtrim.c		ft_split.c		ft_absval.c		ft_nbrlen.c
 
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -67,30 +67,29 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(MAKEFILE)
 all: 
 	@$(MAKE) $(NAME)
 
+
 $(NAME): $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(G)[LIBFT]->Objects and dependencies created.$(N)"
 	@echo "$(G)[LIBFT]->Library created.$(N)"
 
-$(BONUS): $(OBJ)
-	@touch $@
-	@$(AR) $(NAME) $(OBJ)
-	@echo "$(G)[LIBFT]->Objects and dependencies created.$(N)"
-	@echo "$(G)[LIBFT]->Library with bonus created.$(N)"
 
 clean:
 	@$(RM_DIR) $(OBJ_DIR) $(DEP_DIR)
 	@echo "$(G)[LIBFT]->Objects directory $(R)deleted$(N) $(G)successfully.$(N)"
 	@echo "$(G)[LIBFT]->Dependencies directory $(R)deleted$(N) $(G)successfully.$(N)"
 
+
 fclean: 
 	@$(MAKE) clean
 	@$(RM) $(NAME)
 	@echo "$(G)[LIBFT]->All files cleaned!$(N)"
 
+
 re: 
 	@$(MAKE) fclean 
 	@$(MAKE) all
+
 
 -include $(DEP)
 
