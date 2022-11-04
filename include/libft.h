@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 23:51:20 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/04 19:49:19 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:27:13 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define TRUE 	(int)1
 # define FALSE	(int)0
 
-int		ft_absval(long n);
+long	ft_absval(long n);
 
 int		ft_atoi(const char *str);
 
