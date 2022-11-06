@@ -71,20 +71,20 @@ all:
 
 $(NAME): $(OBJ)
 	@$(AR) $(NAME) $(OBJ)
-	@echo "${GREEN}[LIBFT]->Objects and dependencies created.${NC}"
-	@echo "${GREEN}[LIBFT]->Library created.${NC}"
+	@printf "${GREEN}[LIBFT]->Objects and dependencies created.${NC}\n"
+	@printf "${GREEN}[LIBFT]->Library created.${NC}\n"
 
 
 clean:
 	@$(RM_DIR) $(OBJ_DIR) $(DEP_DIR)
-	@echo "${GREEN}[LIBFT]->Objects directory ${RED}deleted${NC} ${GREEN}successfully.${NC}"
-	@echo "${GREEN}[LIBFT]->Dependencies directory ${RED}deleted${NC} ${GREEN}successfully.${NC}"
+	@printf "${GREEN}[LIBFT]->Objects directory ${RED}deleted${NC} ${GREEN}successfully.${NC}\n"
+	@printf "${GREEN}[LIBFT]->Dependencies directory ${RED}deleted${NC} ${GREEN}successfully.${NC}\n"
 
 
 fclean:
 	@$(MAKE) clean
 	@$(RM) $(NAME)
-	@echo "${GREEN}[LIBFT]->All files cleaned!${NC}"
+	@printf "${GREEN}[LIBFT]->All files cleaned!${NC}\n"
 
 
 re:
