@@ -6,9 +6,11 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:45:00 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/11 19:17:24 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:46:27 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
