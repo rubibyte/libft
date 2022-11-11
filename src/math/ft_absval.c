@@ -6,11 +6,9 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 19:47:22 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/04 21:26:54 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:14:11 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 long	ft_absval(long n)
 {
