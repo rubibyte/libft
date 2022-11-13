@@ -6,9 +6,11 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:38:36 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/11 19:17:50 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/13 18:28:12 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {
