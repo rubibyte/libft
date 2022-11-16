@@ -6,7 +6,7 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/11/15 22:28:01 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/11/16 02:09:44 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,16 @@ DEP_DIR = .dep
 
 
 #colors
-DEL_LINE =	\033[2K
-NC = 		\033[0m
-GREEN = 	\033[0;32m
+DEL_LINE =  \033[2K
+NC =		\033[0m
+BLACK = 	\033[0;30m
 RED = 		\033[0;31m
+GREEN = 	\033[0;32m
+YELLOW = 	\033[0;33m
+BLUE = 		\033[0;34m
+PURPLE = 	\033[0;35m
+CYAN =	 	\033[0;36m
+WHITE = 	\033[0;37m
 
 
 IS_SRC =	ft_isalnum.c		ft_isalpha.c		ft_isascii.c \
@@ -93,23 +99,25 @@ RM_DIR = rm -rf
 
 $(OBJ_DIR)/%.o: %.c $(MAKEFILE)
 	@mkdir -p $(dir $@) $(dir $(subst $(OBJ_DIR)/, $(DEP_DIR)/, $@))
+	@printf "${DEL_LINE}\r${BLUE}compiling... $@${NC}"
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
 	@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_DIR)/, $(DEP_DIR)/, $@))
-	@printf "$(DEL_LINE)\r${GREEN}[LIBFT]->Objects and dependencies compiled.${NC}\n"
+
 
 all:
 	@$(MAKE) $(NAME)
 
 
 $(NAME): $(OBJ)
+	@printf "${DEL_LINE}\r${GREEN}[LIBFT]->Objects and dependencies compiled.${NC}\n"
 	@$(AR) $(NAME) $(OBJ)
-	@printf "${GREEN}[LIBFT]->Library created.${NC}\n"
+	@printf "${DEL_LINE}\r${GREEN}[LIBFT]->Library created.${NC}\n"
 
 
 clean:
 	@$(RM_DIR) $(OBJ_DIR) $(DEP_DIR)
-	@printf "${GREEN}[LIBFT]->Objects directory ${RED}deleted${NC} ${GREEN}successfully.${NC}\n"
-	@printf "${GREEN}[LIBFT]->Dependencies directory ${RED}deleted${NC} ${GREEN}successfully.${NC}\n"
+	@printf "${GREEN}[LIBFT]->Objects directory ${RED}deleted ${GREEN}successfully.${NC}\n"
+	@printf "${GREEN}[LIBFT]->Dependencies directory ${RED}deleted ${GREEN}successfully.${NC}\n"
 
 
 fclean:
