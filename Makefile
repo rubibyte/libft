@@ -6,7 +6,7 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/11/16 02:09:44 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/11/16 16:25:08 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ RM_DIR = rm -rf
 
 $(OBJ_DIR)/%.o: %.c $(MAKEFILE)
 	@mkdir -p $(dir $@) $(dir $(subst $(OBJ_DIR)/, $(DEP_DIR)/, $@))
-	@printf "${DEL_LINE}\r${BLUE}compiling... $@${NC}"
+	@printf "${DEL_LINE}\r${CYAN}[LIBFT]compiling... $@${NC}"
 	@$(CC) $(CFLAGS) $(DEP_FLAGS) $(INCLUDE) -c $< -o $@
 	@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_DIR)/, $(DEP_DIR)/, $@))
 
