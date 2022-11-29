@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 16:02:09 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/20 17:21:49 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:37:21 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 int	ft_isalnum(int c)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (TRUE);
-	return (FALSE);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

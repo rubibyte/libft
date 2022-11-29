@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 14:38:43 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/19 02:07:19 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:37:31 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c > 64 && c < 91) || (c > 96 && c < 123))
-		return (TRUE);
-	return (FALSE);
+	return ((c > 64 && c < 91) || (c > 96 && c < 123));
 }

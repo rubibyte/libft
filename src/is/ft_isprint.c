@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 16:47:31 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/09/19 02:16:48 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:41:52 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 int	ft_isprint(int c)
 {
-	if (c > 31 && c < 127)
-		return (TRUE);
-	return (FALSE);
+	return (c > 31 && c < 127);
 }
