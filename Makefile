@@ -6,7 +6,7 @@
 #    By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/16 20:52:25 by xrodrigu          #+#    #+#              #
-#    Updated: 2022/12/01 19:13:34 by xrodrigu         ###   ########.fr        #
+#    Updated: 2022/12/01 19:19:38 by xrodrigu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,4 +140,4 @@ update:
 
 -include $(DEP)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re update
