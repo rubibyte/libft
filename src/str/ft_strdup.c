@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 19:50:43 by xrodrigu          #+#    #+#             */
-/*   Updated: 2022/10/01 18:48:19 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2023/11/05 19:30:34 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,4 @@ char	*ft_strdup(const char *s1)
 		s1_cpy[i] = s1[i];
 	s1_cpy[i] = '\0';
 	return (s1_cpy);
-}	
+}
