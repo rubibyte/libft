@@ -6,7 +6,7 @@
 /*   By: xrodrigu <xrodrigu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 23:51:20 by xrodrigu          #+#    #+#             */
-/*   Updated: 2023/06/01 22:19:00 by xrodrigu         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:58:35 by xrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define TRUE 	(int)1
-# define FALSE	(int)0
+# define TRUE 	1
+# define FALSE	0
 
 long	ft_absval(long n);
 
